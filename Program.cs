@@ -95,7 +95,7 @@ namespace WatsonsStoreManagement
 
         static void UpdateBranch()
         {
-            /*Console.WriteLine("\n------------------------------------------");
+            Console.WriteLine("\n------------------------------------------");
             Console.WriteLine("              BRANCH UPDATE");
             Console.WriteLine("------------------------------------------");
             Console.Write("Enter Branch ID to update: "); 
@@ -112,7 +112,7 @@ namespace WatsonsStoreManagement
             Console.WriteLine("------------------------------------------");
             Console.WriteLine("Branch updated successfully!");
             Console.WriteLine("------------------------------------------");
-            */
+            
 
         }
 
