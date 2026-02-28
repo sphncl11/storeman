@@ -48,6 +48,11 @@ namespace WatsonsStoreManagement
             }
         }
 
+        //contact and income should be numeric only,
+        //but for simplicity, we will keep them as strings in this example.
+        //In a real application, you would want to validate these inputs and
+        //possibly use a more structured data format (like a class or struct)
+        //to represent branches.
         static void AddBranch()
         {
             Console.WriteLine("\n------------------------------------------");
@@ -98,8 +103,18 @@ namespace WatsonsStoreManagement
             Console.WriteLine("\n------------------------------------------");
             Console.WriteLine("              BRANCH UPDATE");
             Console.WriteLine("------------------------------------------");
-            Console.Write("Enter Branch ID to update: "); 
+            Console.Write("Enter Branch ID to update: ");
             string id = Console.ReadLine();
+
+            for (int i = 0; i < branches.Count; i++)
+            {
+                if (branches[i].StartsWith(id + " |"))
+                {
+                    branches.RemoveAt(i);
+                    break;
+                }
+            }
+
             Console.WriteLine("------------------------------------------");
             Console.Write("New Branch Name: "); 
             string name = Console.ReadLine(); 
