@@ -80,12 +80,6 @@ namespace WatsonsStoreManagement
             Console.Write("Enter Monthly Income: ");
             float income = Convert.ToSingle(Console.ReadLine());
 
-            //branchIDs.Add(id);
-            //branchNames.Add(name);
-            //branchAddresses.Add(address);
-            //branchContacts.Add(contact);
-            //branchIncomes.Add(income);
-
             appService.AddBranch(id, name, address, contact, income);
 
             Console.WriteLine("------------------------------------------");
@@ -108,11 +102,11 @@ namespace WatsonsStoreManagement
             foreach (var branch in branches)
             {
                 Console.WriteLine(
-                    BranchID + " | " +
-                    BranchName + " | " +
-                    BranchAddress + " | " +
-                    BranchContact + " | " +
-                    BranchIncome
+                    branch.BranchID + " | " +
+                    branch.BranchName + " | " +
+                    branch.BranchAddress + " | " +
+                    branch.BranchContact + " | " +
+                    branch.BranchIncome
                 );
             }
             Console.WriteLine("\nPress any key to continue...");
@@ -129,6 +123,7 @@ namespace WatsonsStoreManagement
             Console.WriteLine("              BRANCH UPDATE");
             Console.WriteLine("------------------------------------------");
             Console.Write("Enter Branch ID to update: ");
+            int id = Convert.ToInt32(Console.ReadLine());
 
             Console.Write("New Branch Name: ");
             string name = Console.ReadLine();

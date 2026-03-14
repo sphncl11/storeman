@@ -1,9 +1,6 @@
 <Solution>
-  <Project Path="../ClassLibrary1/StoreManagementModels.csproj" Id="a2ea9c6b-6df4-4a83-8938-494af7b0d988" />
-  <Project Path="../StoreManagementDataService/StoreManagementDataService.csproj" Id="d425d06a-7591-4fd2-bc2e-899648b1e7c3" />
   <Project Path="StoreManagementAppService/StoreManagementAppService.csproj" Id="509cbd7c-447f-4083-a48e-23115c3c724d" />
-  <Project Path="WatsonsStoreManagement.csproj">
-    <BuildDependency Project="../ClassLibrary1/StoreManagementModels.csproj" />
-    <BuildDependency Project="../StoreManagementDataService/StoreManagementDataService.csproj" />
-  </Project>
+  <Project Path="StoreManagementDataService/StoreManagementDataService.csproj" />
+  <Project Path="StoreManagementModels/StoreManagementModels.csproj" />
+  <Project Path="WatsonsStoreManagement.csproj" />
 </Solution>
