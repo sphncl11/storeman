@@ -7,7 +7,7 @@ namespace StoreManagementDataService
 {
     public class StoreDataService
     {
-        public List<StoreModels> branches = new List<StoreModels>();
+        private List<StoreModels> branches = new List<StoreModels>();
 
         public void AddBranch(StoreModels branch)
         {

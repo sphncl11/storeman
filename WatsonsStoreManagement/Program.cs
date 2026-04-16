@@ -10,12 +10,6 @@ namespace WatsonsStoreManagement
     {
         static StoreAppService appService = new StoreAppService();
 
-        //static List<int> branchIDs = new List<int>();
-        //static List<string> branchNames = new List<string>();
-        //static List<string> branchAddresses = new List<string>();
-        //static List<string> branchContacts = new List<string>();
-        //static List<float> branchIncomes = new List<float>();
-
         static void Main(string[] args)
         {
             while (true)
@@ -66,7 +60,11 @@ namespace WatsonsStoreManagement
             Console.WriteLine("             BRANCH INSERTION");
             Console.WriteLine("------------------------------------------");
             Console.Write("Enter Branch ID: ");
-            int id = Convert.ToInt32(Console.ReadLine());
+            int id;
+            while (!int.TryParse(Console.ReadLine(), out id))
+            {
+                Console.Write("Invalid input. Enter a valid number: ");
+            }
 
             Console.Write("Enter Branch Name: ");
             string name = Console.ReadLine();
@@ -78,12 +76,25 @@ namespace WatsonsStoreManagement
             string contact = Console.ReadLine();
 
             Console.Write("Enter Monthly Income: ");
-            float income = Convert.ToSingle(Console.ReadLine());
+            float income;
+            while (!float.TryParse(Console.ReadLine(), out income))
+            {
+                Console.Write("Invalid input. Enter a valid number: ");
+            }
 
-            appService.AddBranch(id, name, address, contact, income);
+            bool added = appService.AddBranch(id, name, address, contact, income);
 
             Console.WriteLine("------------------------------------------");
-            Console.WriteLine("Branch added successfully!");
+
+            if (added)
+            {
+                Console.WriteLine("Branch added successfully!");
+            }
+            else
+            {
+                Console.WriteLine("Branch ID already exists!");
+            }
+
             Console.WriteLine("------------------------------------------");
             Console.WriteLine("\nPress any key to continue...");
             Console.ReadKey();
@@ -95,7 +106,7 @@ namespace WatsonsStoreManagement
             Console.WriteLine("\n------------------------------------------");
             Console.WriteLine("              BRANCH LIST");
             Console.WriteLine("------------------------------------------");
-            Console.WriteLine("ID - BRANCH - ADDRESS - CONTACT NO. - MONTHLY INCOME ");
+            Console.WriteLine("ID |   BRANCH   |   ADDRESS   |   CONTACT NO.  |  MONTHLY INCOME ");
 
             var branches = appService.GetBranches();
 
@@ -122,8 +133,23 @@ namespace WatsonsStoreManagement
             Console.WriteLine("\n------------------------------------------");
             Console.WriteLine("              BRANCH UPDATE");
             Console.WriteLine("------------------------------------------");
+
             Console.Write("Enter Branch ID to update: ");
-            int id = Convert.ToInt32(Console.ReadLine());
+            int id;
+            while (!int.TryParse(Console.ReadLine(), out id))
+            {
+                Console.Write("Invalid input. Enter a valid number: ");
+            }
+            bool exists = appService.BranchExists(id);
+            if (!exists)
+            {
+                Console.WriteLine("\n------------------------------------------");
+                Console.WriteLine("Branch not found.");
+                Console.WriteLine("------------------------------------------");
+                Console.WriteLine("\nPress any key to continue...");
+                Console.ReadKey();
+                return;
+            }
 
             Console.Write("New Branch Name: ");
             string name = Console.ReadLine();
@@ -135,28 +161,28 @@ namespace WatsonsStoreManagement
             string contact = Console.ReadLine();
 
             Console.Write("New Monthly Income: ");
-            float income = Convert.ToSingle(Console.ReadLine());
+            float income;
+            while (!float.TryParse(Console.ReadLine(), out income))
+            {
+                Console.Write("Invalid input. Enter a valid number: ");
+            }
 
             bool updated = appService.UpdateBranch(id, name, address, contact, income);
 
-            if (!updated)
-            {
-                Console.WriteLine("\n------------------------------------------");
-                Console.WriteLine("Branch not found.");
-                Console.WriteLine("------------------------------------------");
-                Console.WriteLine("\nPress any key to continue...");
-                Console.ReadKey();
-                return;
-            }
-            /*else
-            {
+            Console.WriteLine("\n------------------------------------------");
 
-                Console.WriteLine("\n------------------------------------------");
+            if (updated)
+            {
                 Console.WriteLine("Branch updated successfully!");
-                Console.WriteLine("------------------------------------------");
-                Console.WriteLine("\nPress any key to continue...");
-                Console.ReadKey();
-            }*/
+            }
+            else
+            {
+                Console.WriteLine("Branch not found. Update failed.");
+            }
+
+            Console.WriteLine("\n------------------------------------------");
+            Console.WriteLine("\nPress any key to continue...");
+            Console.ReadKey();
         }
 
         static void DeleteBranch()
@@ -169,26 +195,27 @@ namespace WatsonsStoreManagement
             Console.WriteLine("            BRANCH TERMINATION");
             Console.WriteLine("------------------------------------------");
             Console.Write("Enter Branch ID to delete: ");
-            int id = Convert.ToInt32(Console.ReadLine());
+            int id;
+            while (!int.TryParse(Console.ReadLine(), out id))
+            {
+                Console.Write("Invalid input. Enter a valid number: ");
+            }
 
             bool deleted = appService.DeleteBranch(id);
-            if (!deleted) 
+            if (deleted) 
+            {
+                Console.WriteLine("\n------------------------------------------");
+                Console.WriteLine("Branch deleted successfully!");
+            }
+            else
             {
                 Console.WriteLine("\n------------------------------------------");
                 Console.WriteLine("Branch not found.");
-                Console.WriteLine("------------------------------------------");
-                Console.WriteLine("\nPress any key to continue...");
-                Console.ReadKey();
-                return;
             }
-            //else
-            //{
-            //Console.WriteLine("\n------------------------------------------");
-            //Console.WriteLine("Branch deleted successfully!");
-            //Console.WriteLine("------------------------------------------");
-            //Console.WriteLine("\nPress any key to continue...");
-            //Console.ReadKey();
-            //}
+
+            Console.WriteLine("------------------------------------------");
+            Console.WriteLine("\nPress any key to continue...");
+            Console.ReadKey();
         }
     }
 }

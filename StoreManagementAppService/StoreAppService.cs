@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using StoreManagementModels;
 using StoreManagementDataService;
+using StoreManagementModels;
+
 
 namespace StoreManagementAppService
 {
@@ -9,22 +10,34 @@ namespace StoreManagementAppService
     {
         StoreDataService dataService = new StoreDataService();
 
-        public void AddBranch(int id, string name, string address, string contact, float income)
+        public bool AddBranch(int id, string name, string address, string contact, float income)
         {
-            StoreModels branch = new StoreModels();
+            if (dataService.FindBranch(id) != null)
+            {
+                return false;
+            }
 
-            branch.BranchID = id;
-            branch.BranchName = name;
-            branch.BranchAddress = address;
-            branch.BranchContact = contact;
-            branch.BranchIncome = income;
+            StoreModels branch = new StoreModels
+            {
+                BranchID = id,
+                BranchName = name,
+                BranchAddress = address,
+                BranchContact = contact,
+                BranchIncome = income
+            };
 
             dataService.AddBranch(branch);
+            return true;
         }
 
         public List<StoreModels> GetBranches()
         {
             return dataService.GetBranches();
+        }
+
+        public bool BranchExists(int id)
+        {
+            return dataService.FindBranch(id) != null;
         }
 
         public bool UpdateBranch(int id, string name, string address, string contact, float income)

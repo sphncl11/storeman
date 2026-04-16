@@ -1,5 +1,5 @@
 <Solution>
-  <Project Path="StoreManagementAppService/StoreManagementAppService.csproj" Id="509cbd7c-447f-4083-a48e-23115c3c724d" />
+  <Project Path="StoreManagementAppService/StoreManagementAppService.csproj" />
   <Project Path="StoreManagementDataService/StoreManagementDataService.csproj" />
   <Project Path="StoreManagementModels/StoreManagementModels.csproj" />
   <Project Path="WatsonsStoreManagement/WatsonsStoreManagement.csproj" />
