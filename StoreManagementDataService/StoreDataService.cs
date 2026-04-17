@@ -7,39 +7,41 @@ namespace StoreManagementDataService
 {
     public class StoreDataService
     {
-        private List<StoreModels> branches = new List<StoreModels>();
+        private IStoreDataService _storeDataService;
+
+        public StoreDataService(IStoreDataService storeDataService)
+        {
+            _storeDataService = storeDataService;
+        }
 
         public void AddBranch(StoreModels branch)
         {
-            branches.Add(branch);
+            _storeDataService.AddBranch(branch);
         }
 
         public List<StoreModels> GetBranches()
         {
-            return branches;
+            return _storeDataService.GetBranches();
         }
 
-        public StoreModels FindBranch(int id)
+        public StoreModels? FindBranch(int id)
         {
-            foreach (StoreModels branch in branches)
-            {
-                if (branch.BranchID == id)
-                {
-                    return branch;
-                }
-            }
-            return null;
+            return _storeDataService.FindBranch(id);
         }
 
-        public bool DeleteBranch(int id)
+        public void UpdateBranch(StoreModels branch)
         {
-            StoreModels branch = FindBranch(id);
+            _storeDataService.UpdateBranch(branch);
+        }
 
-            if (branch == null)
-                return false;
+        public void RemoveBranch(int id)
+        {
+            _storeDataService.RemoveBranch(id);
+        }
 
-            branches.Remove(branch);
-            return true;
+        public bool BranchExists(int id)
+        {
+            return _storeDataService.BranchExists(id);
         }
     }
 }

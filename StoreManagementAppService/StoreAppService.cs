@@ -8,11 +8,12 @@ namespace StoreManagementAppService
 {
     public class StoreAppService
     {
-        IStoreDataService dataService = new StoreJsonDataService();
+        StoreDataService storeDataService = new StoreDataService(new StoreDBData());
+        //IStoreDataService dataService = new StoreJsonDataService();
 
         public bool AddBranch(int id, string name, string address, string contact, float income)
         {
-            if (dataService.FindBranch(id) != null)
+            if (storeDataService.FindBranch(id) != null)
             {
                 return false;
             }
@@ -26,23 +27,23 @@ namespace StoreManagementAppService
                 BranchIncome = income
             };
 
-            dataService.AddBranch(branch);
+            storeDataService.AddBranch(branch);
             return true;
         }
 
         public List<StoreModels> GetBranches()
         {
-            return dataService.GetBranches();
+            return storeDataService.GetBranches();
         }
 
         public bool BranchExists(int id)
         {
-            return dataService.FindBranch(id) != null;
+            return storeDataService.FindBranch(id) != null;
         }
 
         public bool UpdateBranch(int id, string name, string address, string contact, float income)
         {
-            var branch = dataService.FindBranch(id);
+            var branch = storeDataService.FindBranch(id);
 
             if (branch == null)
             {
@@ -54,19 +55,19 @@ namespace StoreManagementAppService
             branch.BranchContact = contact;
             branch.BranchIncome = income;
 
-            dataService.UpdateBranch(branch);
+            storeDataService.UpdateBranch(branch);
 
             return true;
         }
 
         public bool DeleteBranch(int id)
         {
-            if (!dataService.BranchExists(id))
+            if (!storeDataService.BranchExists(id))
             {
                 return false;
             }
 
-            dataService.RemoveBranch(id);
+            storeDataService.RemoveBranch(id);
             return true;
         }
     }
